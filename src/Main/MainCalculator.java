@@ -1,7 +1,9 @@
+package Main;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Calculator{
+public class MainCalculator{
 
     //Create method for addition using BigDecimal to avoid double rounding errors
     public static double add(double A, double B){

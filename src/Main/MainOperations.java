@@ -16,5 +16,7 @@ public class MainOperations {
     public static void equal(){
 
     }
-    
+    public static void setInput(String s){
+        
+    }
 }

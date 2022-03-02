@@ -16,7 +16,13 @@ public class MainOperations {
     public static void equal(){
 
     }
+    public static void numberButton(String s){
+
+    }
     public static void setInput(String s){
         
+    }
+    public static void clear(){
+
     }
 }

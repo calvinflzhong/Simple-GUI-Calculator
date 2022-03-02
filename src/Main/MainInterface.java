@@ -7,10 +7,10 @@ import javafx.scene.control.*;
 import javafx.stage.*;
 
 public class MainInterface extends Application{
-    String num1;
-    String operator;
-    String num2;
-    String numTemp;
+    String num1=null;
+    String operator=null;
+    String num2=null;
+    String numTemp=null;
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Calculator");
 
@@ -52,7 +52,7 @@ public class MainInterface extends Application{
         bC.setOnAction(e-> MainOperations.clear());
         
         Button bDecimal=new Button(".");
-        b1.setOnAction(e-> MainOperations.numberButton("1"));
+        b1.setOnAction(e-> MainOperations.decimalButton());
         
         Button bAdd=new Button("+");
         bAdd.setOnAction(e-> MainOperations.add());

@@ -19,6 +19,9 @@ public class MainOperations {
     public static void numberButton(String s){
 
     }
+    public static void decimalButton(){
+
+    }
     public static void setInput(String s){
         
     }

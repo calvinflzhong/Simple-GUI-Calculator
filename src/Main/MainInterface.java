@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.stage.*;
 
 public class MainInterface extends Application{
+    TextField textField;
     String num1=null;
     String operator=null;
     String num2=null;
@@ -14,60 +15,60 @@ public class MainInterface extends Application{
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Calculator");
 
-        TextField textField=new TextField();
+        textField=new TextField();
         textField.setDisable(true);
         textField.setStyle("-fx-opacity: 1;");
         
         Button b1=new Button("1");
-        b1.setOnAction(e-> MainOperations.numberButton("1"));
+        b1.setOnAction(e-> numberButton("1"));
         
         Button b2=new Button("2");
-        b2.setOnAction(e-> MainOperations.numberButton("2"));
+        b2.setOnAction(e-> numberButton("2"));
         
         Button b3=new Button("3");
-        b3.setOnAction(e-> MainOperations.numberButton("3"));
+        b3.setOnAction(e-> numberButton("3"));
         
         Button b4=new Button("4");
-        b4.setOnAction(e-> MainOperations.numberButton("4"));
+        b4.setOnAction(e-> numberButton("4"));
         
         Button b5=new Button("5");
-        b5.setOnAction(e-> MainOperations.numberButton("5"));
+        b5.setOnAction(e-> numberButton("5"));
         
         Button b6=new Button("6");
-        b6.setOnAction(e-> MainOperations.numberButton("6"));
+        b6.setOnAction(e-> numberButton("6"));
         
         Button b7=new Button("7");
-        b7.setOnAction(e-> MainOperations.numberButton("7"));
+        b7.setOnAction(e-> numberButton("7"));
         
         Button b8=new Button("8");
-        b8.setOnAction(e-> MainOperations.numberButton("8"));
+        b8.setOnAction(e-> numberButton("8"));
         
         Button b9=new Button("9");
-        b9.setOnAction(e-> MainOperations.numberButton("9"));
+        b9.setOnAction(e-> numberButton("9"));
         
         Button b0=new Button("0");
-        b0.setOnAction(e-> MainOperations.numberButton("0"));
+        b0.setOnAction(e-> numberButton("0"));
         
         Button bC=new Button("C");
-        bC.setOnAction(e-> MainOperations.clear());
+        bC.setOnAction(e-> clear());
         
         Button bDecimal=new Button(".");
-        b1.setOnAction(e-> MainOperations.decimalButton());
+        b1.setOnAction(e-> decimalButton());
         
         Button bAdd=new Button("+");
-        bAdd.setOnAction(e-> MainOperations.add());
+        bAdd.setOnAction(e-> operation("+"));
         
         Button bSubtract=new Button("-");
-        bSubtract.setOnAction(e-> MainOperations.subtract());
+        bSubtract.setOnAction(e-> operation("-"));
         
         Button bDivide=new Button("÷");
-        bDivide.setOnAction(e-> MainOperations.divide());
+        bDivide.setOnAction(e-> operation("÷"));
         
         Button bMultiply=new Button("×");
-        bMultiply.setOnAction(e-> MainOperations.multiply());
+        bMultiply.setOnAction(e-> operation("×"));
         
         Button bEqual=new Button("=");
-        bEqual.setOnAction(e-> MainOperations.equal());
+        bEqual.setOnAction(e-> operation("="));
         
         GridPane pane = new GridPane();
         
@@ -98,6 +99,31 @@ public class MainInterface extends Application{
         Scene scene = new Scene(pane, 400, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    public void operation(String operator){
+        
+    }
+    
+    public void numberButton(String s){
+        if(num1==null){
+            num1=s;
+        }else if((num1!=null) && (operator==null)){
+            num1+=s;
+        }
+    }
+    public void decimalButton(){
+
+    }
+    public void clear(){
+
+    }
+
+    public void setInput(String s){
+        textField.setText(s);
+    }
+    
+    public void setInput(double num){
+        textField.setText(num+"");
     }
     
     public void run(){

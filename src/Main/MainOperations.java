@@ -1,31 +1,35 @@
 package Main;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class MainOperations {
-    public static void add(){
 
+    //Create method for addition using BigDecimal to avoid double rounding errors
+    public static double add(double A, double B){
+        BigDecimal bdA= BigDecimal.valueOf(A);
+        BigDecimal bdB= BigDecimal.valueOf(B);
+        return bdA.add(bdB).doubleValue();
     }
-    public static void subtract(){
 
+    //Create method for subtraction
+    public static double subtract(double A, double B){
+        BigDecimal bdA= BigDecimal.valueOf(A);
+        BigDecimal bdB= BigDecimal.valueOf(B);
+        return bdA.subtract(bdB).doubleValue();
     }
-    public static void divide(){
 
+    //Create method for multiplication
+    public static double multiply(double A, double B){
+        BigDecimal bdA= BigDecimal.valueOf(A);
+        BigDecimal bdB= BigDecimal.valueOf(B);
+        return bdA.multiply(bdB).doubleValue();
     }
-    public static void multiply(){
-        
-    }
-    public static void equal(){
 
-    }
-    public static void numberButton(String s){
-
-    }
-    public static void decimalButton(){
-
-    }
-    public static void setInput(String s){
-        
-    }
-    public static void clear(){
-
+    //Create method for division, set scale as 16(rounding digits)
+    public static double divide(double A, double B){
+        BigDecimal bdA= BigDecimal.valueOf(A);
+        BigDecimal bdB= BigDecimal.valueOf(B);
+        return bdA.divide(bdB, 16, RoundingMode.HALF_UP).doubleValue();
     }
 }

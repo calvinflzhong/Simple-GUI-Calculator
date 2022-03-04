@@ -6,6 +6,8 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
 
+import java.util.Objects;
+
 public class MainCalculator extends Application{
     //Declare textfield and initialize variables for storing numbers and operator used in calculations
     TextField textField;
@@ -131,18 +133,20 @@ public class MainCalculator extends Application{
                 if (num1 == null && num2 == null) {
                     setInput(temp);
                 } else if (operator == null) {
-                    setInput(temp = num1 + "");
+                    setInput(temp = num1);
                     num1 = null;
                     operator = null;
                 } else if (num1 != null && num2 != null) {
-                    setInput(temp = calculate(operator) + "");
+                    setInput(temp = calculate(operator));
+                    if(Objects.equals(temp, "Can't divide by 0")){
+                        temp=null;
+                    }
                     num1 = null;
                     num2 = null;
                     operator = null;
                 } else {
                     setInput(num1);
                 }
-
             }
             case "+" -> operationEvent("+");
             case "-" -> operationEvent("-");
@@ -164,19 +168,29 @@ public class MainCalculator extends Application{
             operator=o;
         }else{
             setInput(num1 = calculate(operator) + "");
+            if(Objects.equals(num1, "Can't divide by 0")){
+                num1=null;
+            }
             num2=null;
             operator=o;
         }
     }
     
     //Method for recognizing operator in string format and performing calculation
-    public double calculate(String o){
-        double result=0;
+    public String calculate(String o){
+        String result="";
         switch (o) {
-            case "+" -> result = MainOperations.add(Double.parseDouble(num1), Double.parseDouble(num2));
-            case "-" -> result = MainOperations.subtract(Double.parseDouble(num1), Double.parseDouble(num2));
-            case "×" -> result = MainOperations.multiply(Double.parseDouble(num1), Double.parseDouble(num2));
-            case "÷" -> result = MainOperations.divide(Double.parseDouble(num1), Double.parseDouble(num2));
+            case "+" -> result = String.valueOf(MainOperations.add(Double.parseDouble(num1), Double.parseDouble(num2)));
+            case "-" -> result = String.valueOf(MainOperations.subtract(Double.parseDouble(num1), Double.parseDouble(num2)));
+            case "×" -> result = String.valueOf(MainOperations.multiply(Double.parseDouble(num1), Double.parseDouble(num2)));
+            case "÷" -> {
+                //Display message when trying to divide by 0
+                if (Double.parseDouble(num2) == 0) {
+                    result = "Can't divide by 0";
+                } else {
+                    result = String.valueOf(MainOperations.divide(Double.parseDouble(num1), Double.parseDouble(num2)));
+                }
+            }
         }
         return result;
     }
@@ -242,7 +256,7 @@ public class MainCalculator extends Application{
         textField.setText(null);
     }
     
-    //Method for displaying numbers on texfield
+    //Method for displaying numbers on textfield
     public void setInput(String s){
         textField.setText(s);
     }

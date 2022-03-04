@@ -2,7 +2,7 @@ package Main;
 
 public class Main {
     public static void main(String[] args){
-        MainInterface mainInterface = new MainInterface();
-        mainInterface.run();
+        MainCalculator mainCalculator = new MainCalculator();
+        mainCalculator.run();
     }
 }

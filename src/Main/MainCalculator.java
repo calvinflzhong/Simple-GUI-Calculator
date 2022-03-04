@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.stage.*;
 
 public class MainCalculator extends Application{
+    //Declare textfield and initialize variables for storing numbers and operator used in calculations
     TextField textField;
     String num1=null;
     String operator=null;
@@ -17,11 +18,13 @@ public class MainCalculator extends Application{
         primaryStage.setTitle("Calculator");
 
         GridPane pane = new GridPane();
-
+        
+        //Create textfield and set styles
         textField=new TextField();
         textField.setDisable(true);
         textField.setStyle("-fx-opacity: 1;-fx-pref-height: 100px;-fx-pref-width: 100px;-fx-font-size:45");
         
+        //Create buttons, set styles, and set on click action
         Button b1=new Button("1");
         b1.setOnAction(e-> numberButton("1"));
         b1.setStyle("-fx-pref-height: 100px;-fx-pref-width: 100px;-fx-font-size:40");
@@ -90,11 +93,12 @@ public class MainCalculator extends Application{
         bEqual.setOnAction(e-> operation("="));
         bEqual.setStyle("-fx-pref-height: 100px;-fx-pref-width: 100px;-fx-font-size:40");
         
-        
+        //Format gridpane
         ColumnConstraints col30p = new ColumnConstraints();
         col30p.setPercentWidth(30);
         pane.getColumnConstraints().addAll(col30p, col30p, col30p, col30p);
         
+        //Add elements of gridpane (textfield and buttons)
         pane.add(textField, 0,0,4,1);
         pane.add(bC, 0,3);
         pane.add(bAdd, 3,3);
@@ -119,35 +123,35 @@ public class MainCalculator extends Application{
         primaryStage.show();
     }
     
+    //Method called when operator buttons are called including =
     public void operation(String o){
-        switch(o){
-            case "=":{
-                if(num1==null && num2==null){
+        switch (o) {
+            //Different scenarios when user might press = and treat each differently
+            case "=" -> {
+                if (num1 == null && num2 == null) {
                     setInput(temp);
-                }
-                else if(operator==null) {
-                    setInput(temp=num1+"");
-                    num1=null;
-                    operator=null;
-                }
-                else if(num1!=null && num2!=null) {
+                } else if (operator == null) {
+                    setInput(temp = num1 + "");
+                    num1 = null;
+                    operator = null;
+                } else if (num1 != null && num2 != null) {
                     setInput(temp = calculate(operator) + "");
-                    num1=null;
-                    num2=null;
-                    operator=null;
-                }
-                else{
+                    num1 = null;
+                    num2 = null;
+                    operator = null;
+                } else {
                     setInput(num1);
                 }
-                
-            } break;
-            case "+": operationEvent("+");break;
-            case "-": operationEvent("-");break;
-            case "×": operationEvent("×");break;
-            case "÷": operationEvent("÷");break;
+
+            }
+            case "+" -> operationEvent("+");
+            case "-" -> operationEvent("-");
+            case "×" -> operationEvent("×");
+            case "÷" -> operationEvent("÷");
         }
     }
     
+    //Method for different scenarios when +, -, ×, ÷ pressed
     public void operationEvent(String o){
         if(num1==null && num2==null && temp==null && operator==null) {
             //do nothing
@@ -165,6 +169,7 @@ public class MainCalculator extends Application{
         }
     }
     
+    //Method for recognizing operator in string format and performing calculation
     public double calculate(String o){
         double result=0;
         switch (o) {
@@ -176,6 +181,7 @@ public class MainCalculator extends Application{
         return result;
     }
     
+    //Method for when number buttons are pressed, and different scenarios when user press number buttons
     public void numberButton(String s){
         if(num1==null){
             num1=s;
@@ -208,6 +214,7 @@ public class MainCalculator extends Application{
         }
     }
     
+    //Method for when user presses the decimal point button and different scenarios when they are pressed
     public void decimalButton(){
         if(num1==null){
             //do nothing
@@ -225,6 +232,8 @@ public class MainCalculator extends Application{
             }
         }
     }
+    
+    //Method for when the C button is pressed to clear all saved variables
     public void clear(){
         num1=null;
         num2=null;
@@ -232,13 +241,10 @@ public class MainCalculator extends Application{
         operator=null;
         textField.setText(null);
     }
-
+    
+    //Method for displaying numbers on texfield
     public void setInput(String s){
         textField.setText(s);
-    }
-    
-    public void setInput(double num){
-        textField.setText(num+"");
     }
     
     public void run(){

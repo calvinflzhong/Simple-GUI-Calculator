@@ -123,35 +123,47 @@ public class MainCalculator extends Application{
         Scene scene = new Scene(pane, 400, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        /*
+     Controller controller = new Controller();
+     controller.operation(0);
+     */
     }
+    
+    
+    
     
     //Method called when operator buttons are called including =
     public void operation(String o){
-        switch (o) {
-            //Different scenarios when user might press = and treat each differently
-            case "=" -> {
-                if (num1 == null && num2 == null) {
-                    setInput(temp);
-                } else if (operator == null) {
-                    setInput(temp = num1);
-                    num1 = null;
-                    operator = null;
-                } else if (num1 != null && num2 != null) {
-                    setInput(temp = calculate(operator));
-                    if(Objects.equals(temp, "Can't divide by 0")){
-                        temp=null;
+        try {
+            switch (o) {
+                //Different scenarios when user might press = and treat each differently
+                case "=" -> {
+                    if (num1 == null && num2 == null) {
+                        setInput(temp);
+                    } else if (operator == null) {
+                        setInput(temp = num1);
+                        num1 = null;
+                        operator = null;
+                    } else if (num1 != null && num2 != null) {
+                        setInput(temp = calculate(operator));
+                        if (Objects.equals(temp, "Can't divide by 0")) {
+                            temp = null;
+                        }
+                        num1 = null;
+                        num2 = null;
+                        operator = null;
+                    } else {
+                        setInput(num1);
                     }
-                    num1 = null;
-                    num2 = null;
-                    operator = null;
-                } else {
-                    setInput(num1);
                 }
+                case "+" -> operationEvent("+");
+                case "-" -> operationEvent("-");
+                case "×" -> operationEvent("×");
+                case "÷" -> operationEvent("÷");
             }
-            case "+" -> operationEvent("+");
-            case "-" -> operationEvent("-");
-            case "×" -> operationEvent("×");
-            case "÷" -> operationEvent("÷");
+        }catch (Exception e){
+            System.out.println("Error: "+e);
         }
     }
     

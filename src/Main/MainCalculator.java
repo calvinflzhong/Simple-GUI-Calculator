@@ -198,7 +198,7 @@ public class MainCalculator extends Application{
             case "÷" -> {
                 //Display message when trying to divide by 0
                 if (Double.parseDouble(num2) == 0) {
-                    result = "Can't divide by 0";
+                    showAlert("Can't divide by 0");
                 } else {
                     result = String.valueOf(MainOperations.divide(Double.parseDouble(num1), Double.parseDouble(num2)));
                 }
@@ -266,6 +266,14 @@ public class MainCalculator extends Application{
         temp=null;
         operator=null;
         textField.setText(null);
+    }
+
+    public void showAlert(String msg){
+        Alert a= new Alert(Alert.AlertType.WARNING);
+        a.setTitle("Warning");
+        a.setHeaderText("Invalid Calculation");
+        a.setContentText(msg);
+        a.show();
     }
     
     //Method for displaying numbers on textfield
